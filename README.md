@@ -1,6 +1,5 @@
-Here's a polished and professional `README.md` tailored to your **Automated Answer Sheet Grading System** project, highlighting the advanced AI, OCR, and feedback capabilities:
 
----
+
 
 # 📝 Automated Answer Sheet Grading System
 
