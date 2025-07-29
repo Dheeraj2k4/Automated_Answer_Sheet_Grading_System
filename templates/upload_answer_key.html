@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Upload Answer Key</h2>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="answer_key">Select Answer Key (DOCX format)</label>
+                    <input type="file" class="form-control-file" id="answer_key" name="answer_key" accept=".docx" required>
+                    <small class="form-text text-muted">
+                        The answer key should be in DOCX format with questions and answers in the format:
+                        Q1. Question text
+                        A1. Answer text
+                    </small>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Upload Answer Key</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 

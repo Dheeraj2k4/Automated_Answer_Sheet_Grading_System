@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Evaluation Results</h2>
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Test</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th>Score</th>
+                            <th>Feedback</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for score in scores %}
+                        <tr>
+                            <td>{{ score[0] }}</td>
+                            <td>{{ score[1] }}</td>
+                            <td>{{ score[2] }}</td>
+                            <td>{{ score[3] }}</td>
+                            <td>{{ score[4] }}</td>
+                            <td>{{ score[5] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-3">
+        <a href="{{ url_for('evaluate') }}" class="btn btn-primary">Evaluate More Answers</a>
+        <a href="{{ url_for('admin_home') }}" class="btn btn-secondary">Back to Admin Home</a>
+    </div>
+</div>
+{% endblock %} 

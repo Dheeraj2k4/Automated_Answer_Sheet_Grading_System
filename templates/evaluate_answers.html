@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Evaluate Student Answers</h2>
+    
+    <form method="POST">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Student Answers</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Question</th>
+                                <th>Answer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for answer in answers %}
+                            <tr>
+                                <td>{{ answer[1] }}</td>
+                                <td>{{ answer[3] }}</td>
+                                <td>{{ answer[2] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Evaluate Answers</button>
+        <a href="{{ url_for('teacher_home') }}" class="btn btn-secondary">Back to Home</a>
+    </form>
+</div>
+{% endblock %} 

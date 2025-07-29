@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head lang="en">
+        <meta charset="UTF-8">
+    
+        <!--Page Title-->
+        <title>AES_ai - Evaluate</title>
+    
+        <!--Meta Keywords and Description-->
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <!--Favicon-->
+        <link rel="shortcut icon" href="images/favicon.ico" title="Favicon"/>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='namari-color.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='font-awesome.min.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='animate.css')}}"/>
+    
+        <!--Google Webfonts-->
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    </head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status" class="la-ball-triangle-path">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
+        <div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
+        <div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;"></div>
+        <div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
+        <div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
+    </div>
+    <div id="wrapper">
+        <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
+            <div id="header" class="nav-collapse">
+                <div class="row clearfix">
+                    <div class="col-1">
+                        <div id="logo">
+                            <img src="{{url_for('static',filename="images/logo1animate.gif")}}" id="banner-logo" alt="Landing Page"/>
+                            <img src="{{url_for('static',filename="images/logo1animate.gif")}}" id="navigation-logo" alt="Landing Page"/>
+                        </div>
+                        <aside>
+                            <!-- Social Icons removed -->
+                        </aside>
+                        <!--Main Navigation-->
+                        <nav id="nav-main">
+                            <ul>
+                                <li>
+                                    <a href="{{ url_for('index') }}">Home</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('admin_home') }}">Admin</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('admin_logout') }}">Logout</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!--End of Main Navigation-->
+                        <div id="nav-trigger"><span></span></div>
+                        <nav id="nav-mobile"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div id="banner-content" class="row clearfix">
+                <div class="col-38">
+                    <div class="section-heading">
+                        <h1>Answer Evaluation System</h1>
+                        <h2>Follow these steps to evaluate student answers</h2>
+                    </div>
+
+                    <div class="evaluation-steps">
+                        <div class="step-container">
+                            <div class="step active" id="step1">
+                                <h3>Step 1: Upload Student Answers</h3>
+                                <p>Upload PDF files containing student answers. Files will be saved in the 'answer_sheets' folder.</p>
+                                <form id="studentFilesForm" enctype="multipart/form-data" class="upload-form">
+                                    <div class="file-upload-container">
+                                        <label for="student_files" class="file-upload-label">
+                                            <i class="fa fa-cloud-upload"></i>
+                                            <span>Choose Student Files</span>
+                                        </label>
+                                        <input type="file" id="student_files" name="student_files" accept=".pdf" multiple required>
+                                        <div class="file-info">
+                                            <span class="file-name">No files chosen</span>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="button submit-button">
+                                        <i class="fa fa-upload"></i> Upload Student Files
+                                    </button>
+                                    <div id="studentFilesStatus" class="status-message"></div>
+                                </form>
+                            </div>
+
+                            <div class="step" id="step2">
+                                <h3>Step 2: Upload Answer Key</h3>
+                                <p>Upload the answer key file (DOCX format) containing the correct answers.</p>
+                                <form id="answerKeyForm" enctype="multipart/form-data" class="upload-form">
+                                    <div class="file-upload-container">
+                                        <label for="master_file" class="file-upload-label">
+                                            <i class="fa fa-file-text"></i>
+                                            <span>Choose Answer Key</span>
+                                        </label>
+                                        <input type="file" id="master_file" name="master_file" accept=".docx" required>
+                                        <div class="file-info">
+                                            <span class="file-name">No file chosen</span>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="button submit-button">
+                                        <i class="fa fa-upload"></i> Upload Answer Key
+                                    </button>
+                                    <div id="answerKeyStatus" class="status-message"></div>
+                                </form>
+                            </div>
+
+                            <div class="step" id="step3">
+                                <h3>Step 3: Generate Results</h3>
+                                <p>Generate evaluation results for all student answers. This may take some time depending on the number of files.</p>
+                                <form id="generateForm" class="upload-form">
+                                    <button type="button" id="generateBtn" class="button submit-button" disabled>
+                                        <i class="fa fa-cogs"></i> Generate Results
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="step" id="step4">
+                                <h3>Evaluation Results</h3>
+                                <div id="resultsContainer" class="results-container">
+                                    <div id="resultsContent"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-navigation">
+                            <button class="button" id="prev-step" disabled>Previous Step</button>
+                            <button class="button" id="next-step">Next Step</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Include JavaScript resources -->
+    <script src="{{url_for('static',filename="js/jquery.1.8.3.min.js")}}"></script>
+    <script src="{{url_for('static',filename="js/featherlight.min.js")}}"></script>
+    <script src="{{url_for('static',filename="js/featherlight.gallery.min.js")}}"></script>
+    <script src="{{url_for('static',filename="js/jquery.enllax.min.js")}}"></script>
+    <script src="{{url_for('static',filename="js/jquery.scrollUp.min.js")}}"></script>
+    <script src="{{url_for('static',filename="js/jquery.easing.min.js")}}"></script>
+    <script src="{{url_for('static',filename="js/jquery.stickyNavbar.min.js")}}"></script>
+    <script src="{{url_for('static',filename="js/jquery.waypoints.min.js")}}"></script>
+    <script src="{{url_for('static',filename="js/images-loaded.min.js")}}"></script>
+    <script src="{{url_for('static',filename="js/lightbox.min.js")}}"></script>
+    <script src="{{url_for('static',filename="js/site.js")}}"></script>
+
+    <script>
+    let currentStep = 1;
+    const totalSteps = 4;
+    let studentFilesUploaded = false;
+    let answerKeyUploaded = false;
+
+    function updateStepNavigation() {
+        const prevButton = document.getElementById('prev-step');
+        const nextButton = document.getElementById('next-step');
+        
+        prevButton.disabled = currentStep === 1;
+        nextButton.textContent = currentStep === totalSteps ? 'Finish' : 'Next Step';
+    }
+
+    function showStep(stepNumber) {
+        document.querySelectorAll('.step').forEach(step => {
+            step.classList.remove('active');
+        });
+        document.getElementById(`step${stepNumber}`).classList.add('active');
+        currentStep = stepNumber;
+        updateStepNavigation();
+    }
+
+    document.getElementById('prev-step').addEventListener('click', () => {
+        if (currentStep > 1) {
+            showStep(currentStep - 1);
+        }
+    });
+
+    document.getElementById('next-step').addEventListener('click', () => {
+        if (currentStep < totalSteps) {
+            showStep(currentStep + 1);
+        } else {
+            window.location.href = "{{ url_for('admin_home') }}";
+        }
+    });
+
+    // File input handlers
+    document.getElementById('student_files').addEventListener('change', function(e) {
+        const fileNames = Array.from(this.files).map(file => file.name).join(', ');
+        document.querySelector('#step1 .file-name').textContent = fileNames || 'No files chosen';
+    });
+
+    document.getElementById('master_file').addEventListener('change', function(e) {
+        const fileName = this.files[0]?.name || 'No file chosen';
+        document.querySelector('#step2 .file-name').textContent = fileName;
+    });
+
+    // Form submission handlers
+    document.getElementById('studentFilesForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        
+        fetch('/upload_student_files', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            const statusDiv = document.getElementById('studentFilesStatus');
+            if (data.success) {
+                statusDiv.className = 'status-message success';
+                statusDiv.textContent = data.message;
+                studentFilesUploaded = true;
+                updateGenerateButton();
+            } else {
+                statusDiv.className = 'status-message error';
+                statusDiv.textContent = data.message;
+            }
+        })
+        .catch(error => {
+            const statusDiv = document.getElementById('studentFilesStatus');
+            statusDiv.className = 'status-message error';
+            statusDiv.textContent = 'Error uploading files: ' + error;
+        });
+    });
+
+    document.getElementById('answerKeyForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        
+        fetch('/upload_answer_key', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            const statusDiv = document.getElementById('answerKeyStatus');
+            if (data.success) {
+                statusDiv.className = 'status-message success';
+                statusDiv.textContent = data.message;
+                answerKeyUploaded = true;
+                updateGenerateButton();
+            } else {
+                statusDiv.className = 'status-message error';
+                statusDiv.textContent = data.message;
+            }
+        })
+        .catch(error => {
+            const statusDiv = document.getElementById('answerKeyStatus');
+            statusDiv.className = 'status-message error';
+            statusDiv.textContent = 'Error uploading answer key: ' + error;
+        });
+    });
+
+    function updateGenerateButton() {
+        const generateBtn = document.getElementById('generateBtn');
+        generateBtn.disabled = !(studentFilesUploaded && answerKeyUploaded);
+    }
+
+    document.getElementById('generateBtn').addEventListener('click', function() {
+        this.disabled = true;
+        this.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Generating...';
+        
+        fetch('/generate_results', {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                displayResults(data.results);
+                showStep(4);
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('Error generating results: ' + error);
+        })
+        .finally(() => {
+            this.disabled = false;
+            this.innerHTML = '<i class="fa fa-cogs"></i> Generate Results';
+        });
+    });
+
+    function displayResults(results) {
+        let html = '<div class="results-grid">';
+        
+        results.forEach(studentResult => {
+            html += `
+                <div class="student-result-card">
+                    <div class="student-result-header">
+                        <h4>${studentResult.student_file}</h4>
+                        <h5>Score: ${studentResult.total_score}</h5>
+                    </div>
+                    ${studentResult.detailed_results.map(result => `
+                        <div class="question-container">
+                            <div class="question-header">Q: ${result.question}</div>
+                            <div class="answers-grid">
+                                <div class="answer-box">
+                                    <strong>Student's Answer:</strong>
+                                    <p>${result.student_answer}</p>
+                                </div>
+                                <div class="answer-box">
+                                    <strong>Ideal Answer:</strong>
+                                    <p>${result.ideal_answer}</p>
+                                </div>
+                            </div>
+                            <div class="evaluation-box">
+                                <div class="score">Score: ${result.score}/10</div>
+                                <div class="feedback">${result.feedback}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        document.getElementById('resultsContent').innerHTML = html;
+    }
+
+    // Initialize first step
+    showStep(1);
+    </script>
+
+    <style>
+        #banner {
+            background: url("{{ url_for('static', filename='images/banner-images/globe.gif') }}") no-repeat center top;
+            background-size: cover;
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+        }
+
+        .evaluation-steps {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+        }
+
+        .step-container {
+            position: relative;
+            min-height: 400px;
+            width: 100%;
+            padding: 0;
+        }
+
+        .step {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .step h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .file-upload-container {
+            margin-bottom: 20px;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            background: #e9ecef;
+            border-color: #007bff;
+        }
+
+        .file-upload-label i {
+            font-size: 24px;
+            margin-right: 10px;
+            color: #007bff;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-info {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .file-name {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .submit-button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .submit-button i {
+            font-size: 18px;
+        }
+
+        .status-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .status-message.success {
+            background-color: #dff0d8;
+            color: #3c763d;
+            border: 1px solid #d6e9c6;
+        }
+
+        .status-message.error {
+            background-color: #f2dede;
+            color: #a94442;
+            border: 1px solid #ebccd1;
+        }
+
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .step-navigation button {
+            width: 48%;
+        }
+
+        .results-container {
+            margin-top: 20px;
+            width: 100%;
+            height: calc(100vh - 300px);
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px;
+            width: calc(100% - 40px);
+        }
+
+        .student-result-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .student-result-header {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .student-result-header h4 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 1em;
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .student-result-header h5 {
+            margin: 0;
+            color: #34495e;
+            font-size: 0.9em;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .question-container {
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .question-header {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .answer-box {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .answer-box strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #2c3e50;
+            font-size: 0.85em;
+        }
+
+        .answer-box p {
+            margin: 0;
+            color: #34495e;
+            line-height: 1.3;
+            font-size: 0.85em;
+        }
+
+        .evaluation-box {
+            background: rgba(240, 240, 240, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .score {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 4px;
+            font-size: 0.85em;
+        }
+
+        .feedback {
+            color: #34495e;
+            line-height: 1.3;
+            font-size: 0.85em;
+        }
+
+        /* Custom scrollbar for results container */
+        .results-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .results-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        .results-container::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .results-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 1800px) {
+            .results-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Adjust banner content for better space usage */
+        #banner-content {
+            padding: 0;
+            width: 100%;
+        }
+
+        .col-38 {
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+        }
+
+        /* Adjust the main container */
+        .main-content {
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+        }
+    </style>
+</body>
+</html> 
