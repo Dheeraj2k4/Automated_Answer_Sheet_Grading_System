@@ -181,4 +181,14 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-Feel free to ask if you'd like a **README badge section**, a **Deployed Live Link**, or a **PDF demo download** added.
+## 🔐 Authentication
+
+To use the Google Vision API, you need to provide a **service account key** from Google Cloud.
+
+1. Go to your [Google Cloud Console](https://console.cloud.google.com/).
+2. Create a service account and download the credentials JSON.
+3. Rename it to `service_account.json` and place it in the project root.
+4. **Do NOT commit this file.** It's listed in `.gitignore` for your safety.
+
+You can refer to `service_account_example.json` for the required structure.
+
