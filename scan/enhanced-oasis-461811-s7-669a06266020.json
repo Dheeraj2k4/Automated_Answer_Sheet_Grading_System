@@ -1,13 +1,13 @@
 {
   "type": "service_account",
-  "project_id": "enhanced-oasis-461811-s7",
-  "private_key_id": "669a0626602054d7f3282a0321aa00e75815a170",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC+5s/r99Gtspn3\nraavJwtLpM0d6/OU2TJ5IcrHsPDIYQIyysYj5KPGeRvztK/AFKGL20P5XZ55AOG8\noWeKVTYGpHbnbsJ8q82OJehz+2iYxWXCu5e7kd/oNa988itg35xLNzI6ALN+z6PV\nOBFjQf11mWG+1pzzrhohC3gqPCK7/NgcolLk4qWN5SRcDU9YAIAb4pfAXHSKRKN7\nyGiVlgPb4scZpQzMCo/luGkelb/WpdBthKagBAY9IV52ftlCNUGiMqP0FzBrW8uq\nRKRrGrRy+Mqi++tR3/12V81v2z2ufSgUa4+dTpR4fDxvWilcrNTIF5ZPJkfRBIaf\n6eKYaVVRAgMBAAECggEACWpUPs/TpM7QUNa85+p7wFLH7lHt6wVpm690yzOtE3/z\n2h4Vxs1K/dHpNNRQfv9xfoataAQT2eVXDNzz0K7+VbZouiZEg748Opaga/B+VpsV\nR1UF4TmbDs6PicC+rpXmxS+rK7DPSYnLi3uLAX+OpP1ANLesaOkZRzAT8JbT0nxK\njS3rF91A8BphNhugQ+uYtXl/VJ819hTqS1F8efiZDBas1H7aQC1u/6lPRtyPX3RY\nwUXVOVihX2kZHmuTiunpEb3IFHLON1+zYxLh8V7ejXQPMS+MJCTbB13Nzuck/xsv\naAPvxM9OG4yFCEACyUOh+J7xcWEyt82FBgUb1toCQQKBgQDuJSWr8VcyrwVAFuDv\nEgd4/uylwOyfMoZs+4IVLSrU609g4wz3sRrh7wEefcMB+NwIKH7h6wKH9OLabjsO\npdHzP7scqN6SBEK6NkItrUaHzYo8moRkzQbGJ/x1pKXtfyJuoRULu/+5MXBd46k3\nfuw2zaS0pcnHtnx5m4llmcf9QQKBgQDNNuTiAyoMTYHNNslgOaDjMK9fncof/tr/\nRmlbxZeHc3nofnvJ18E/0X9EZb4qagPClmJKFf4+XAHJYCgdKHyr4iUEFxyMjHUS\nwg4TRAdaj8+sKgnqhhid9PAoA8LP/UkSWMsmUfRkQtBdGytAevszowdCFQXeDMgC\nSEaUxIyEEQKBgFzynLh2cs0yaH8yLsrAo7AC94RePzyHcNYaeBQh0+TUjt/G3qnS\nMybZrPskpLchVWfNvnAY1J0R5HTSrzQxXjdtuW8fLfeZuB2LzdqcFbota/XpbSEW\nsL0ooC2efLCsfVjmgBtbXhz/AddzYvlpDXL6Yn2rc40CWaTxIvhHxDnBAoGBAJff\nhmjWGqpcOjIb19EFFVLOVxwWdN5VCNJf0919UHWIOrKb2RU6PeTzMJL4EVLmfr3l\n+fwGZtDT2uaj6UwbCJlUljx+tjw2PvaQ80XC1QZq5DDwM8KDV3ifK5URo322X/va\nBw7nHE2PPRGK5+mimoJOpzJ6yIrbPrKhtsqm469hAoGBAKTOZoW51Pl7Z1hgeUsN\nbLYXcxR8vH8KVpPG9clKTc7z2d6+tvkJpMUcIDeavmar40oKLVHJKTQbZfcBNByz\nG4D/rfstEiIMAhIRDnRA7BO5YNgQ7Vy7FHNo1E7CvXIfjU96NZpRZ9/jXcYNPFeX\nd6mb24lMFh076iN7YsipH7lg\n-----END PRIVATE KEY-----\n",
-  "client_email": "dheera@enhanced-oasis-461811-s7.iam.gserviceaccount.com",
-  "client_id": "104059106472810368772",
+  "project_id": "your-project-id",
+  "private_key_id": "your-private-key-id",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nYOUR_PRIVATE_KEY_HERE\n-----END PRIVATE KEY-----\n",
+  "client_email": "your-service-account@your-project-id.iam.gserviceaccount.com",
+  "client_id": "your-client-id",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dheera%40enhanced-oasis-461811-s7.iam.gserviceaccount.com",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/your-service-account%40your-project-id.iam.gserviceaccount.com",
   "universe_domain": "googleapis.com"
 }
