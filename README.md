@@ -1,204 +1,184 @@
-# Answer Evaluation System 📚✨
+Here's a polished and professional `README.md` tailored to your **Automated Answer Sheet Grading System** project, highlighting the advanced AI, OCR, and feedback capabilities:
 
-Welcome to the **Answer Evaluation System** repository! This project leverages advanced **Machine Learning (ML)** and **Natural Language Processing (NLP)** techniques to accurately evaluate student answers. Our system achieves an impressive accuracy rate of 89%. Below, you'll find detailed information on the project, including setup instructions, an overview of ML and NLP, and the technologies used.
+---
 
-![Project Screenshot](screenshot/preview.gif)
+# 📝 Automated Answer Sheet Grading System
 
-## Table of Contents
+**AI-powered evaluation of handwritten student answers with feedback, accuracy, and elegance.**
 
-- [What is Machine Learning?](#what-is-machine-learning)
-- [What is Natural Language Processing?](#what-is-natural-language-processing)
-- [Project Overview](#project-overview)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Code Overview](#code-overview)
-- [Contributing](#contributing)
-- [License](#license)
+![App Demo](screenshot/preview.gif)
 
-## What is Machine Learning? 🤖
+Welcome to the **Automated Answer Sheet Grading System** — an advanced platform built using cutting-edge **AI, NLP, OCR, and LLMs** that automates the evaluation of handwritten student responses from scanned answer sheets. Designed to provide accurate scores **and personalized feedback**, this project makes grading efficient, insightful, and scalable.
 
-**Machine Learning (ML)** is a subset of artificial intelligence (AI) that focuses on building systems that can learn from and make decisions based on data. ML algorithms use statistical techniques to identify patterns and make predictions or decisions without being explicitly programmed to perform the task.
+---
 
-## What is Natural Language Processing? 🗣️
+## 📌 Table of Contents
 
-**Natural Language Processing (NLP)** is a branch of artificial intelligence that helps computers understand, interpret, and respond to human language. NLP combines computational linguistics, computer science, and statistical modeling to process and analyze large amounts of natural language data.
+* [🚀 Features](#-features)
+* [🧠 Tech Stack](#-tech-stack)
+* [🖼️ Architecture](#-architecture)
+* [⚙️ Installation](#-installation)
+* [🌐 Usage](#-usage)
+* [🔍 Evaluation Pipeline](#-evaluation-pipeline)
+* [📂 File Structure](#-file-structure)
+* [🤝 Contributing](#-contributing)
+* [📜 License](#-license)
 
-## Project Overview 🌟
+---
 
-The **Answer Evaluation System** uses a variety of NLP techniques to evaluate student responses against expected answers. The system calculates multiple scores based on different criteria and then combines these scores using a weighted average to provide a final evaluation score. The key features include:
+## 🚀 Features
 
-- **Preprocessing Text**: Tokenization and Lemmatization
-- **Exact and Partial Match**: Comparing the student’s answer to the expected answer
-- **Cosine Similarity**: Measuring similarity between texts
-- **Sentiment Analysis**: Evaluating the sentiment of the response
-- **Enhanced Sentence Match**: Using pre-trained models for semantic similarity
-- **Multinomial Naive Bayes**: Probabilistic analysis
-- **Coherence and Relevance Scores**: Assessing logical flow and content relevance
+✅ **Automatic Grading** of handwritten answers from scanned PDFs
+✅ **Google Vision OCR API** for accurate handwritten text extraction
+✅ **Mistral 7B (via Ollama)** for deep semantic evaluation
+✅ **Advanced NLP** using techniques like cosine similarity, sentiment analysis, coherence scoring
+✅ **Feedback Generator** for each answer
+✅ **Interactive UI** built with Flask & Bootstrap
+✅ **High Accuracy (89%)** across various answer formats
+✅ **Works on PDF Answer Sheets** with clean output and scoring breakdown
 
-## Technologies Used 🚀
+---
 
-- **Flask**: Micro web framework for Python
-- **Python**: Primary programming language
-- **Jupyter Notebook (ipynb)**: Interactive computational environment
-- **HTML, CSS, Bootstrap**: Frontend development
-- **Gemini AI**: For advanced NLP models
-- **Machine Learning & NLP**: Core of the evaluation system
-- **SQL**: Database management
+## 🧠 Tech Stack
 
-## Installation 💻
+| Technology                            | Role                                |
+| ------------------------------------- | ----------------------------------- |
+| **Python**                            | Core programming language           |
+| **Flask**                             | Web framework                       |
+| **Google Vision API**                 | OCR for extracting handwritten text |
+| **Mistral 7B (Ollama)**               | LLM for deep answer evaluation      |
+| **NLP (NLTK, Sklearn, Transformers)** | Text processing & similarity        |
+| **Bootstrap, HTML/CSS**               | Frontend design                     |
+| **Jupyter Notebooks**                 | Development and testing             |
 
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/yourusername/answer-evaluation-system.git
-    cd answer-evaluation-system
-    ```
+---
 
-2. **Create a virtual environment**:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate   # On Windows use `venv\Scripts\activate`
-    ```
+## 🖼️ Architecture
 
-3. **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-
-4. **Run the application**:
-    ```bash
-    python admin.py
-    ```
-
-## Usage 📚
-
-1. Open your web browser and navigate to `http://127.0.0.1:5000`.
-2. Enter the expected answer and the student’s answer in the provided fields.
-3. Click "Evaluate" to get the evaluation score.
-
-![Evaluation GIF](screenshot/evaluation_demo.gif)
-
-## Code Overview 🧩
-
-### Preprocess Text
-
-```python
-def preprocess_text(text):
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
-    lemmatized_tokens = [lemmatizer.lemmatize(token.lower()) for token in tokens]
-    return lemmatized_tokens
+```mermaid
+graph TD
+A[PDF Upload] --> B[Google Vision API - OCR]
+B --> C[Extracted Answer Texts]
+C --> D[Mistral 7B - Answer Evaluation]
+D --> E[NLP & ML Scoring Pipeline]
+E --> F[Feedback Generator]
+F --> G[Final Score + Feedback]
+G --> H[Frontend Display]
 ```
 
-### Exact Match Function
+---
 
-```python
-def exact_match(expected_answer, student_answer):
-    return int(expected_answer == student_answer)
+## ⚙️ Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/yourusername/answer-evaluation-system.git
+   cd answer-evaluation-system
+   ```
+
+2. **Create a virtual environment**
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   ```
+
+3. **Install required packages**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Start Ollama & Load Mistral 7B**
+
+   ```bash
+   ollama run mistral
+   ```
+
+5. **Run the application**
+
+   ```bash
+   python admin.py
+   ```
+
+---
+
+## 🌐 Usage
+
+1. Open your browser and go to `http://127.0.0.1:5000`
+2. Upload a scanned PDF answer sheet
+3. Click "Evaluate"
+4. View:
+
+   * Individual question scores
+   * Personalized feedback
+   * Overall score
+
+---
+
+## 🔍 Evaluation Pipeline
+
+Each answer is passed through a pipeline of models and scoring functions:
+
+* 🔤 **OCR**: Handwriting extracted using Google Vision API
+* 🧽 **Preprocessing**: Tokenization, Lemmatization
+* 📊 **Matching Metrics**:
+
+  * Exact Match
+  * Partial Token Overlap
+  * Cosine Similarity (TF-IDF)
+* ❤️ **Sentiment Analysis**: Understands tone and effort
+* 💡 **Semantic Scoring**: Using Mistral 7B (via Ollama)
+* 🧠 **ML Classification**: Naive Bayes for probabilistic scoring
+* 🧭 **Feedback**: Dynamic feedback based on gaps/match
+* ⚖️ **Weighted Score**: Final score based on multiple criteria
+
+---
+
+## 📂 File Structure
+
+```bash
+answer-evaluation-system/
+├── admin.py                  # Main Flask app
+├── ocr_module.py             # Google Vision OCR logic
+├── evaluation.py             # Scoring logic and ML models
+├── feedback_generator.py     # Personalized feedback generation
+├── templates/
+│   ├── index.html            # Frontend UI
+├── static/
+│   └── styles.css            # UI styling
+├── screenshot/
+│   ├── preview.gif           # App preview
+│   └── evaluation_demo.gif   # Evaluation process
+└── requirements.txt          # Dependencies
 ```
 
-### Partial Match Function
+---
 
-```python
-def partial_match(expected_answer, student_answer):
-    expected_tokens = preprocess_text(expected_answer)
-    student_tokens = preprocess_text(student_answer)
-    common_tokens = set(expected_tokens) & set(student_tokens)
-    match_percentage = len(common_tokens) / max(len(expected_tokens), len(student_tokens))
-    return match_percentage
-```
+## 🤝 Contributing
 
-### Cosine Similarity Function
+Contributions are welcome! Feel free to:
 
-```python
-def cosine_similarity_score(expected_answer, student_answer):
-    vectorizer = TfidfVectorizer(tokenizer=preprocess_text)
-    tfidf_matrix = vectorizer.fit_transform([expected_answer, student_answer])
-    cosine_sim = cosine_similarity(tfidf_matrix[0], tfidf_matrix[1])[0][0]
-    return cosine_sim
-```
+* ⭐ Star this repo
+* 🐛 Report issues
+* 📥 Submit PRs with improvements or new features
 
-### Sentiment Analysis Function
+---
 
-```python
-def sentiment_analysis(text):
-    sia = SentimentIntensityAnalyzer()
-    sentiment_score = sia.polarity_scores(text)['compound']
-    return (sentiment_score + 1) / 2
-```
+## 📜 License
 
-### Enhanced Sentence Match Function
+This project is licensed under the [MIT License](LICENSE).
 
-```python
-def enhanced_sentence_match(expected_answer, student_answer):
-    model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
-    embeddings_expected = model.encode([expected_answer])
-    embeddings_student = model.encode([student_answer])
-    similarity = cosine_similarity([embeddings_expected.flatten()], [embeddings_student.flatten()])[0][0]
-    return similarity
-```
+---
 
-### Multinomial Naive Bayes Score
+## 📣 Acknowledgements
 
-```python
-def multinomial_naive_bayes_score(expected_answer, student_answer):
-    answers = [expected_answer, student_answer]
-    vectorizer = CountVectorizer(tokenizer=preprocess_text)
-    X = vectorizer.fit_transform(answers)
-    y = [0, 1]
-    clf = MultinomialNB()
-    clf.fit(X, y)
-    probs = clf.predict_proba(X)
-    return probs[1][1]
-```
+* [Google Cloud Vision API](https://cloud.google.com/vision)
+* [Ollama + Mistral 7B](https://ollama.com)
+* [HuggingFace Transformers](https://huggingface.co)
+* \[NLTK, Scikit-learn, Flask]
 
-### Weighted Average Score Function
+---
 
-```python
-def weighted_average_score(scores, weights):
-    weighted_sum = sum(score * weight for score, weight in zip(scores, weights))
-    total_weight = sum(weights)
-    return weighted_sum / total_weight
-```
-
-### Evaluation Function
-
-```python
-def evaluate(expected, response):
-    if expected == response:
-        return 10
-    elif not response:
-        return 0
-
-    exact_match_score = exact_match(expected, response)
-    partial_match_score = partial_match(expected, response)
-    cosine_similarity_score_value = cosine_similarity_score(expected, response)
-    sentiment_score = sentiment_analysis(response)
-    enhanced_sentence_match_score = enhanced_sentence_match(expected, response)
-    multinomial_naive_bayes_score_value = multinomial_naive_bayes_score(expected, response)
-    semantic_similarity_value = semantic_similarity_score(expected, response)
-    coherence_value = coherence_score(expected, response)
-    relevance_value = relevance_score(expected, response)
-
-    scores = [exact_match_score, partial_match_score, cosine_similarity_score_value, sentiment_score,
-              enhanced_sentence_match_score, multinomial_naive_bayes_score_value, semantic_similarity_value,
-              coherence_value, relevance_value]
-    weights = [0.15, 0.1, 0.1, 0.05, 0.1, 0.1, 0.1, 0.1, 0.1]
-
-    scaled_scores = [score * 10 for score in scores]
-    final_score = weighted_average_score(scaled_scores, weights)
-    rounded_score = round(final_score)
-
-    print("Exact Match Score:", exact_match_score)
-    print("Partial Match Score:", partial_match_score)
-    print("Cosine Similarity Score:", cosine_similarity_score_value)
-    print("Sentiment Score:", sentiment_score)
-    print("Enhanced Sentence Match Score:", enhanced_sentence_match_score)
-    print("Multinomial Naive Bayes Score:", multinomial_naive_bayes_score_value)
-    print("Semantic Similarity Score:", semantic_similarity_value)
-    print("Coherence Score:", coherence_value)
-    print("Relevance Score:", relevance_value)
-
-    return rounded_score
-```
+Feel free to ask if you'd like a **README badge section**, a **Deployed Live Link**, or a **PDF demo download** added.
